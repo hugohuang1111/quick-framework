@@ -1,5 +1,5 @@
 
-luaoc = require(cc.PACKAGE_NAME .. ".luaoc")
+luaoc = require("luaoc")
 
 function device.showAlertIOS(title, message, buttonLabels, listener)
 end
