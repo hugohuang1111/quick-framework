@@ -107,7 +107,7 @@ cc.FRAMEWORK_NAME = "quick-cocos2d-x"
 
 require(cc.PACKAGE_NAME .. ".debug")
 require(cc.PACKAGE_NAME .. ".functions")
-require(cc.PACKAGE_NAME .. ".cocos2dx")
+require(cc.PACKAGE_NAME .. ".cocos2dxEx")
 
 printInfo("")
 printInfo("# DEBUG                        = "..DEBUG)
@@ -116,11 +116,8 @@ printInfo("#")
 device     = require(cc.PACKAGE_NAME .. ".device")
 transition = require(cc.PACKAGE_NAME .. ".transition")
 display    = require(cc.PACKAGE_NAME .. ".display")
-filter     = require(cc.PACKAGE_NAME .. ".filter")
 audio      = require(cc.PACKAGE_NAME .. ".audio")
 network    = require(cc.PACKAGE_NAME .. ".network")
-crypto     = require(cc.PACKAGE_NAME .. ".crypto")
-json       = require(cc.PACKAGE_NAME .. ".json")
 
 if device.platform == "android" then
     require(cc.PACKAGE_NAME .. ".platform.android")
@@ -131,17 +128,6 @@ elseif device.platform == "mac" then
 end
 
 require(cc.PACKAGE_NAME .. ".cc.init")
-
-if LOAD_DEPRECATED_API then
-    ui         = require(cc.PACKAGE_NAME .. ".ui")
-
-    local dp = cc.PACKAGE_NAME .. ".deprecated."
-    require(dp .. "deprecated_functions")
-end
-
-if LOAD_SHORTCODES_API then
-    require(cc.PACKAGE_NAME .. ".shortcodes")
-end
 
 ----
 
