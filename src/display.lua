@@ -72,9 +72,9 @@ local sharedAnimationCache   = cc.AnimationCache:getInstance()
 -- check device screen size
 local glview = sharedDirector:getOpenGLView()
 if nil == glview then
-    glview = cc.GLViewImpl:createWithRect("HelloLua",
+    glview = cc.GLViewImpl:createWithRect("QuickCocos", 
         cc.rect(0, 0, CONFIG_SCREEN_WIDTH or 900, CONFIG_SCREEN_HEIGHT or 640))
-    director:setOpenGLView(glview)
+    sharedDirector:setOpenGLView(glview)
 end
 
 local size = glview:getFrameSize()
@@ -435,7 +435,11 @@ Layer 对象提供了触摸事件、重力感应、Android 按键检测等功能
 
 ]]
 function display.newLayer()
-    return cc.Layer:create()
+    local layer = display.newNode()
+    layer:setContentSize(display.width, display.height)
+    layer:setTouchEnabled(true)
+
+    return layer
 end
 
 --[[--
@@ -582,7 +586,7 @@ function display.newSprite(filename, x, y, params)
             if display.TEXTURES_PIXEL_FORMAT[filename] then
                 cc.Texture2D:setDefaultAlphaPixelFormat(display.TEXTURES_PIXEL_FORMAT[filename])
                 sprite = spriteClass:create(filename)
-                cc.Texture2D:setDefaultAlphaPixelFormat(cc.TEXTURE2_D_PIXEL_FORMAT_RGB_A8888)
+                cc.Texture2D:setDefaultAlphaPixelFormat(cc.TEXTURE2D_PIXEL_FORMAT_RGBA8888)
             else
                 if params and params.capInsets then
                     sprite = spriteClass:create(params.capInsets, filename)
