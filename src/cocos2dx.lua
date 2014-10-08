@@ -45,7 +45,7 @@ THE SOFTWARE.
 
 ]]
 
-local p = cc.PACKAGE_NAME .. ".cocos2dxEx."
+local p = cc.PACKAGE_NAME .. ".cocos2dx."
 
 require(p .. "Event")
 require(p .. "NodeEx")

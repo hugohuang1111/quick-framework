@@ -107,7 +107,7 @@ cc.FRAMEWORK_NAME = "quick-cocos2d-x"
 
 require(cc.PACKAGE_NAME .. ".debug")
 require(cc.PACKAGE_NAME .. ".functions")
-require(cc.PACKAGE_NAME .. ".cocos2dxEx")
+require(cc.PACKAGE_NAME .. ".cocos2dx")
 
 printInfo("")
 printInfo("# DEBUG                        = "..DEBUG)
