@@ -435,9 +435,15 @@ Layer 对象提供了触摸事件、重力感应、Android 按键检测等功能
 
 ]]
 function display.newLayer()
-    local layer = display.newNode()
-    layer:setContentSize(display.width, display.height)
-    layer:setTouchEnabled(true)
+    local layer
+
+    if cc.bPlugin_ then
+        layer = display.newNode()
+        layer:setContentSize(display.width, display.height)
+        layer:setTouchEnabled(true)
+    else
+        layer = cc.Layer:create()
+    end
 
     return layer
 end
@@ -448,7 +454,7 @@ end
 
 LayerColor 对象使用指定的颜色填充。
 
-@param ccColor3B color
+@param ccColor4B color
 
 @return LayerColor
 
@@ -485,6 +491,11 @@ function display.newNode()
     return cc.Node:create()
 end
 
+if cc.ClippingRectangleNode then
+    cc.ClippingRegionNode = cc.ClippingRectangleNode
+else
+    cc.ClippingRectangleNode = cc.ClippingRegionNode
+end
 --[[--
 
 创建并返回一个 ClippingRegionNode 对象。
@@ -515,7 +526,11 @@ scene:addChild(clipnode)
 
 ]]
 function display.newClippingRegionNode(rect)
-    return cc.ClippingRegionNode:create(rect)
+    if rect then
+        return cc.ClippingRegionNode:create(rect)
+    else
+        return cc.ClippingRegionNode:create()
+    end
 end
 
 --[[--
@@ -641,7 +656,13 @@ local sprite = display.newScale9Sprite("Box.png", 0, 0, cc.size(400, 300))
 
 ]]
 function display.newScale9Sprite(filename, x, y, size, capInsets)
-    return display.newSprite(filename, x, y, {class = cc.Scale9Sprite, size = size, capInsets = capInsets})
+    local scale9sp
+    if cc.bPlugin_ then
+        scale9sp = ccui.Scale9Sprite
+    else
+        scale9sp = cc.Scale9Sprite
+    end
+    return display.newSprite(filename, x, y, {class = scale9sp, size = size, capInsets = capInsets})
 end
 
 --[[--
@@ -1554,7 +1575,7 @@ end
 
 ]]
 function display.removeAnimationCache(name)
-    sharedAnimationCache:removeAnimationByName(name)
+    sharedAnimationCache:removeAnimation(name)
 end
 
 --[[--
@@ -1625,7 +1646,7 @@ local sp = display.printscreen(node, {})
 @param node A node to print.
 @param args
 
-@return An instance of Sprite or FilteredSprite.
+@return FilteredSprite   An instance of Sprite or FilteredSprite.
 
 ]]
 function display.printscreen(node, args)
