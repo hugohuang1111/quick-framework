@@ -105,6 +105,10 @@ cc.PACKAGE_NAME = string.sub(CURRENT_MODULE_NAME, 1, -6)
 cc.VERSION = "3.2 RC"
 cc.FRAMEWORK_NAME = "quick-cocos2d-x"
 
+if cc.Node.removeTouchEvent then
+    cc.bPlugin_ = true
+end
+
 require(cc.PACKAGE_NAME .. ".debug")
 require(cc.PACKAGE_NAME .. ".functions")
 require(cc.PACKAGE_NAME .. ".cocos2dx")
